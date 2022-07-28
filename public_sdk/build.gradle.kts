@@ -92,6 +92,6 @@ dependencies {
     println("public ------> find and setting libs")
     File("${projectDir.path}/libs").list()?.forEach {
         println("public ------> use libs '$it'")
-        implementation(files("libs/$it"))
+        api(files("libs/$it"))
     }
 }
