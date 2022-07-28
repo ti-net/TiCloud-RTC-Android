@@ -32,13 +32,37 @@ android {
     }
 }
 
+
+
+afterEvaluate {
+    publishing{
+        publications.create<MavenPublication>("releaseVersion"){
+            groupId = "com.tinet.ticloudrtc"
+            artifactId = "TiCloud-RTC-Android_test"
+            version = PublicSdkConfig.versionName
+            from(components["release"])
+        }
+    }
+}
+
+dependencies {
+    api(
+        fileTree(
+            mapOf(
+                "include" to "*.jar",
+                "dir" to "libs"
+            )
+        )
+    )
+}
+
 val version = PublicSdkConfig.versionName
 val sdkFile = "TiCloudRTC_Android_SDK_${PublicSdkConfig.versionName}_release.zip"
 val downloadedSdkFile = File("$buildDir/downloaded_sdk/$sdkFile")
 
 task<de.undercouch.gradle.tasks.download.Download>("downloadSdk") {
     group = "custom"
-    src("https://tinet-sdk-release.s3.cn-north-1.amazonaws.com.cn/TiCloudRTC/sdk/v${PublicSdkConfig.versionName}/TiCloudRTC_Android_SDK_${PublicSdkConfig.versionName}_release.zip")
+    src("https://tinet-sdk-release.s3.cn-north-1.amazonaws.com.cn/TiCloudRTC/sdk/v$version/TiCloudRTC_Android_SDK_${version}_release.zip")
     dest(downloadedSdkFile)
     overwrite(true)
     onlyIfModified(true)
@@ -59,7 +83,7 @@ task<de.undercouch.gradle.tasks.download.Download>("downloadSdk") {
 
         copy{
             from(zipTree(downloadedSdkFile))
-            include("include")
+            include("include/**")
             into("${project.projectDir}/src/main/jniLibs")
         }
     }
@@ -68,30 +92,4 @@ task<de.undercouch.gradle.tasks.download.Download>("downloadSdk") {
 
 tasks.named("preBuild"){
     dependsOn("downloadSdk")
-}
-
-afterEvaluate {
-    publishing{
-        publications.create<MavenPublication>("releaseVersion"){
-            groupId = "com.tinet.ticloudrtc"
-            artifactId = "TiCloud-RTC-Android_test"
-            version = PublicSdkConfig.versionName
-            from(components["release"])
-        }
-    }
-}
-
-dependencies {
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.4.2")
-    implementation("com.google.android.material:material:1.6.1")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-
-    println("public ------> find and setting libs")
-    File("${projectDir.path}/libs").list()?.forEach {
-        println("public ------> use libs '$it'")
-        api(files("libs/$it"))
-    }
 }
