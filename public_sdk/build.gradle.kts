@@ -60,7 +60,12 @@ val version = PublicSdkConfig.versionName
 val sdkFile = "TiCloudRTC_Android_SDK_${PublicSdkConfig.versionName}_release.zip"
 val downloadedSdkFile = File("$buildDir/downloaded_sdk/$sdkFile")
 
+task<Delete>("deleteExpiredFiles"){
+    delete = setOf("${projectDir.path}/libs","${projectDir.path}/src/main/jinLibs")
+}
+
 task<de.undercouch.gradle.tasks.download.Download>("downloadSdk") {
+    dependsOn("deleteExpiredFiles")
     group = "custom"
     src("https://tinet-sdk-release.s3.cn-north-1.amazonaws.com.cn/TiCloudRTC/sdk/v$version/TiCloudRTC_Android_SDK_${version}_release.zip")
     dest(downloadedSdkFile)
