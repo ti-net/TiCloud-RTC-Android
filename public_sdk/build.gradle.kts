@@ -38,7 +38,7 @@ afterEvaluate {
     publishing{
         publications.create<MavenPublication>("releaseVersion"){
             groupId = "com.github.ti-net"
-            artifactId = "TiCloud-RTC-Android_test"
+            artifactId = "TiCloud-RTC-Android"
             version = PublicSdkConfig.versionName
             from(components["release"])
         }
