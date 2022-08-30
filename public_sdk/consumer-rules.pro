@@ -1,1 +1,5 @@
 -keep class io.agora.**{*;}
+-keep class com.tinet.ticloudrtc.bean.**{*;}
+-keep class com.tinet.ticloudrtc.utils.**{*;}
+-keep class com.tinet.ticloudrtc.http.**{*;}
+-keep class com.tinet.ticloudrtc.validator.**{*;}
