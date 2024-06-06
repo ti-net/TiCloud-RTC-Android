@@ -5,5 +5,5 @@ object ProjectConfig{
 }
 
 object PublicSdkConfig{
-    const val versionName = "4.0.0-beta4"
+    const val versionName = "4.0.0"
 }
