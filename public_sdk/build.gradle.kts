@@ -54,6 +54,27 @@ dependencies {
             )
         )
     )
+
+    // kotlin 协程
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
+
+    // kotlin 反射
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.10")
+
+    // retrofit2 gson 转换库
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // json 解析库
+    api("com.google.code.gson:gson:2.9.0")
+
+    // 网络请求库
+    api("com.squareup.okhttp3:okhttp:3.14.9")
+    api("com.squareup.retrofit2:retrofit:2.9.0")
+
+    // 观测云
+    implementation("com.cloudcare.ft.mobile.sdk.tracker.agent:ft-sdk:1.5.0")
+    implementation("com.cloudcare.ft.mobile.sdk.tracker.agent:ft-native:1.1.0")
 }
 
 val version = PublicSdkConfig.versionName
