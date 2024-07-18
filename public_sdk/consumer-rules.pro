@@ -3,6 +3,7 @@
 -keep class com.tinet.ticloudrtc.utils.**{*;}
 -keep class com.tinet.ticloudrtc.http.**{*;}
 -keep class com.tinet.ticloudrtc.validator.**{*;}
+-keep class com.tinet.ticloudrtc.services.**{*;}
 
 -dontwarn com.ft.sdk.**
 

@@ -12,4 +12,15 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <!-- 对于 Android 12 及以上设备，还需要添加如下权限： -->
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"  />
+
+    <!--android 9.0上使用前台服务，需要添加权限-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <application>
+        <service
+            android:name="com.tinet.ticloudrtc.services.RtcCallNotificationService"
+            android:exported="false"
+            android:foregroundServiceType="microphone|mediaPlayback" />
+
+    </application>
 </manifest>
