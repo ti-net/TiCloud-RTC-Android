@@ -73,8 +73,8 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
 
     // 观测云
-    implementation("com.cloudcare.ft.mobile.sdk.tracker.agent:ft-sdk:1.5.0")
-    implementation("com.cloudcare.ft.mobile.sdk.tracker.agent:ft-native:1.1.0")
+    compileOnly("com.cloudcare.ft.mobile.sdk.tracker.agent:ft-sdk:1.5.0")
+    compileOnly("com.cloudcare.ft.mobile.sdk.tracker.agent:ft-native:1.1.0")
 }
 
 val version = PublicSdkConfig.versionName
