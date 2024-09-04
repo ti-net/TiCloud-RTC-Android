@@ -1,4 +1,3 @@
-import Config.*
 
 plugins {
     id("com.android.library")
@@ -6,12 +5,20 @@ plugins {
     id("maven-publish")
 }
 
+object PublicSdkConfig{
+    const val versionName = "4.2.10"
+}
+
 android {
-    compileSdk = ProjectConfig.compileSdk
+
+    namespace = "com.tinet.ticloudrtc"
+
+    compileSdk = 34
 
     defaultConfig {
-        minSdk=ProjectConfig.minSdk
-        targetSdk=ProjectConfig.targetSdk
+        minSdk = 21
+        lint.targetSdk = 34
+        testOptions.targetSdk = 34
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -30,16 +37,20 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    publishing {
+        singleVariant("release")
+    }
 }
 
 
+publishing{
+    publications.create<MavenPublication>("releaseVersion"){
+        groupId = "com.github.ti-net"
+        artifactId = "TiCloud-RTC-Android"
+        version = PublicSdkConfig.versionName
 
-afterEvaluate {
-    publishing{
-        publications.create<MavenPublication>("releaseVersion"){
-            groupId = "com.github.ti-net"
-            artifactId = "TiCloud-RTC-Android"
-            version = PublicSdkConfig.versionName
+        afterEvaluate {
             from(components["release"])
         }
     }
@@ -56,20 +67,20 @@ dependencies {
     )
 
     // kotlin 协程
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
 
     // kotlin 反射
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.10")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.22")
 
     // retrofit2 gson 转换库
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     // json 解析库
-    implementation("com.google.code.gson:gson:2.9.0")
+    implementation("com.google.code.gson:gson:2.10.1")
 
     // 网络请求库
-    implementation("com.squareup.okhttp3:okhttp:3.14.9")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
 
     // 观测云
