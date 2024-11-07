@@ -6,7 +6,7 @@ plugins {
 }
 
 object PublicSdkConfig{
-    const val versionName = "4.3.0"
+    const val versionName = "4.3.1"
 }
 
 android {
@@ -93,7 +93,17 @@ val sdkFile = "TiCloudRTC_Android_SDK_${PublicSdkConfig.versionName}_release.zip
 val zipPackagesPath = File("${rootDir.absolutePath}/zip_packages/$sdkFile")
 
 task<Delete>("deleteExpiredFiles"){
-    delete = setOf("${projectDir.path}/libs","${projectDir.path}/src/main/jinLibs")
+    dependsOn("clean")
+
+    delete = setOf(
+        "${projectDir.path}/libs",
+        "${projectDir.path}/src/main/jinLibs",
+        "${projectDir.path}/src/main/res",
+        "${projectDir.path}/src/main/AndroidManifest.xml",
+        "${projectDir.path}/proguard-rules.pro",
+        "${projectDir.path}/consumer-rules.pro"
+    )
+
     doLast {
         println("start to copy libs")
 
@@ -113,6 +123,30 @@ task<Delete>("deleteExpiredFiles"){
             from(zipTree(zipPackagesPath))
             include("include/**")
             into("${project.projectDir}/src/main/jniLibs")
+        }
+
+        copy{
+            from(zipTree(zipPackagesPath))
+            include("raw/**")
+            into("${project.projectDir}/src/main/res")
+        }
+
+        copy{
+            from(zipTree(zipPackagesPath))
+            include("AndroidManifest.xml")
+            into("${project.projectDir}/src/main")
+        }
+
+        copy{
+            from(zipTree(zipPackagesPath))
+            include("proguard-rules.pro")
+            into("${project.projectDir}")
+        }
+
+        copy{
+            from(zipTree(zipPackagesPath))
+            include("consumer-rules.pro")
+            into("${project.projectDir}")
         }
     }
 }
