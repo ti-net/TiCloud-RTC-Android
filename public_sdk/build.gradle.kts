@@ -127,8 +127,8 @@ task<Delete>("deleteExpiredFiles"){
 
         copy{
             from(zipTree(zipPackagesPath))
-            include("raw/**")
-            into("${project.projectDir}/src/main/res")
+            include("res/**")
+            into("${project.projectDir}/src/main")
         }
 
         copy{
