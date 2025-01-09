@@ -6,7 +6,7 @@ plugins {
 }
 
 object PublicSdkConfig{
-    const val versionName = "4.3.2"
+    const val versionName = "4.4.0"
 }
 
 android {
