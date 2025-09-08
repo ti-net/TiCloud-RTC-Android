@@ -6,7 +6,7 @@ plugins {
 }
 
 object PublicSdkConfig{
-    const val versionName = "5.0.0-beta.1"
+    const val versionName = "5.0.0-beta.2"
 }
 
 android {
@@ -86,6 +86,11 @@ dependencies {
     // 观测云
     compileOnly("com.cloudcare.ft.mobile.sdk.tracker.agent:ft-sdk:1.5.0")
     compileOnly("com.cloudcare.ft.mobile.sdk.tracker.agent:ft-native:1.1.0")
+
+    // 声网 RTM SDK(版本：io.agora.rtm:rtm-sdk:1.5.3)
+    implementation("io.agora.rtm:rtm-sdk:1.5.3")
+    // 声网 RTC SDK(版本：io.agora.rtc:agora-special-voice:4.5.2.3)
+    implementation("io.agora.rtc:agora-special-voice:4.5.2.3")
 }
 
 val version = PublicSdkConfig.versionName
